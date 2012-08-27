@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to create configure.
 AC_PREREQ(2.56)
 
-AC_INIT(pangox-compat, 0.0.0, [/dev/null])
+AC_INIT(pangox-compat, 0.0.1, [/dev/null])
 
 AC_CONFIG_SRCDIR([pangox.pc.in])
 
