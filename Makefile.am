@@ -14,7 +14,7 @@ MAINTAINERCLEANFILES = \
 	$(srcdir)/mkinstalldirs \
 	`find "$(srcdir)" -type f -name Makefile.in -print`
 
-EXTRA_DIST = autogen.sh pangox.def
+EXTRA_DIST = autogen.sh pangox.def pangox.aliases
 
 
 pangoincludedir=$(includedir)/pango-1.0/pango
