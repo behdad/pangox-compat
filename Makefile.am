@@ -48,6 +48,7 @@ libpangox_1_0_la_SOURCES = 			\
 	pangox-private.h   			\
 	pangox-fontcache.c 			\
 	pangox-fontmap.c			\
+	pango-impl-utils.h			\
 	basic-x.c				\
 	tables-big.i
 
