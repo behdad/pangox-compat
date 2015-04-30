@@ -1344,21 +1344,6 @@ pango_x_font_describe (PangoFont *font)
     return NULL;
 }
 
-PangoMap *
-pango_x_get_shaper_map (PangoLanguage *language)
-{
-  static guint engine_type_id = 0;
-  static guint render_type_id = 0;
-
-  if (engine_type_id == 0)
-    {
-      engine_type_id = g_quark_from_static_string (PANGO_ENGINE_TYPE_SHAPE);
-      render_type_id = g_quark_from_static_string (PANGO_RENDER_TYPE_X);
-    }
-
-  return pango_find_map (language, engine_type_id, render_type_id);
-}
-
 static PangoCoverage *
 pango_x_font_get_coverage (PangoFont     *font,
 			   PangoLanguage *language)
@@ -1373,12 +1358,11 @@ pango_x_font_find_shaper (PangoFont     *font G_GNUC_UNUSED,
 			  PangoLanguage *language,
 			  guint32        ch)
 {
-  PangoMap *shape_map = NULL;
-  PangoScript script;
-
-  shape_map = pango_x_get_shaper_map (language);
-  script = pango_script_for_unichar (ch);
-  return (PangoEngineShape *)pango_map_get_engine (shape_map, script);
+  static PangoEngineShape *shaper;
+  if (g_once_init_enter (&shaper))
+    g_once_init_leave (&shaper,
+		       _pango_basic_x_script_engine_create("BasicScriptEngineXCompat"));
+  return shaper;
 }
 
 /* Utility functions */
